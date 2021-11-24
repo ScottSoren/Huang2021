@@ -1,0 +1,24 @@
+{
+    "A_el": 0.196,
+    "date": null,
+    "setup": null,
+    "RE_vs_RHE": 0.26,
+    "L": null,
+    "name": "EC-MS calibration for None on None",
+    "ms_cal_results": [
+        {
+            "mass": "M32",
+            "F": 0.0495593221803036,
+            "cal_type": "internal",
+            "mol": "O2",
+            "name": "O2 at M32"
+        },
+        {
+            "mass": "M44",
+            "F": 0.046182030605598154,
+            "cal_type": "internal",
+            "mol": "CO2",
+            "name": "CO2 at M44"
+        }
+    ]
+}

@@ -29,27 +29,10 @@ ecms_2 = ec_2 + ms_2
 # ecms_2.plot()
 
 # define and apply the MS calibration:
-calibration = ECMSCalibration(
-    ms_cal_results=[
-        MSCalResult(mol="O2", mass="M32", cal_type="internal", F=3.5 / 275),
-        # from Figure S6b: 275 pmol/s of O2 production gives 3.5 pA MS signal.
-        MSCalResult(mol="CO2", mass="M44", cal_type="internal", F=2.75 / 275),
-        # From Figure S6d: 275 pmol/s of CO2 production gives 2.75 pA MS signal.
-    ],
-    RE_vs_RHE=0.260,  # reference potential on RHE scale in [V]
-    A_el=0.196,  # electrode area in [cm^2]
-)
-
-ecms_1.calibration = calibration
+ecms_1.calibration = ECMSCalibration.read("../calibration/calibration_1.ix")
 # ecms_1.plot(mol_list=["O2", "CO2"])  # overview plot with calibrated data
-ecms_2.calibration = calibration
+ecms_2.calibration = ECMSCalibration.read("../calibration/calibration_2.ix")
 # ecms_2.plot(mol_list=["O2", "CO2"])  # overview plot with calibrated data
-
-
-# ------ export the calibrated data ----------- #
-
-# ecms_1.export("reduced_sample.csv", mol_list=["O2", "CO2"])
-# ecms_2.export("oxidized_sample.csv", mol_list=["O2", "CO2"])
 
 # ------- define the timespans (using the overview plots) --------- #
 # first, get the start of the data to t=0
@@ -63,7 +46,13 @@ tspan_2 = [15, 300]
 
 LOADING = 0.04e-3 * ecms_1.A_el  # loading in [g], based on 0.04 mg / cm^2
 
-# ---------- fig 2a and b ---------- #
+
+# ------ export the calibrated data ----------- #
+
+# ecms_1.export("reduced_sample.csv", mol_list=["O2", "CO2"])
+# ecms_2.export("oxidized_sample.csv", mol_list=["O2", "CO2"])
+
+# ---------- fig 2a and b (Ru/G-450Red) ---------- #
 
 fig_ab, axes_ab = plt.subplots(nrows=3, sharex=True)
 axes_ab[0].set_ylabel("O2 cal. signal / (pmol s$^{-1}$)")
@@ -75,8 +64,8 @@ t, v = ecms_1.grab("potential", tspan=tspan_1)  # time in [s], potential vs RHE 
 t_MS = t + 0  # A delay in the MS data can be applied here (in [s])
 #  ^ for example, the average delay for O2 at L=100um is 3.3s [Trimarco2018]
 #  ^ needs to be stated clearly and transparently if you choose to do so!
-n_dot_O2 = ecms_1.grab_for_t("n_dot_O2", t=t_MS)  # O2 flux in [mol/s]
-n_dot_CO2 = ecms_1.grab_for_t("n_dot_CO2", t=t_MS)  # CO2 flux in [mol/s]
+n_dot_O2 = ecms_1.grab_for_t("n_dot_O2", t=t_MS, tspan_bg=[0, 20])  # O2 flux in [mol/s]
+n_dot_CO2 = ecms_1.grab_for_t("n_dot_CO2", t=t_MS, tspan_bg=[0, 20])  # CO2 flux in [mol/s]
 j_total = ecms_1.grab_for_t("raw_current", t=t)  # current in [mA]
 
 axes_ab[0].plot(v, n_dot_O2 * 1e12, "k")
@@ -91,7 +80,6 @@ J_mass_O2 = j_O2 / LOADING  # mass-normalized OER current in [A/g]
 J_mass_CO2 = j_CO2 / LOADING  # mass-normalized graphene oxidation current in [A/g]
 
 # We notice that it's proportional to the flux by the factor:
-
 FACTOR = (4 * FARADAY_CONSTANT) / LOADING  # [(A/g) / (mol/s)]
 
 # but we plotted the flux in pmol/s rather than mol/s, so we have to factor that in:
@@ -114,10 +102,9 @@ right_axes_ab[2].set_ylabel("j$_{total}$ / (A g$^{-1}$)")
 
 
 fig_ab.set_figheight(fig_ab.get_figwidth() * 2)
-fig_ab.savefig("fig2ab.png")
 
 
-# ---------- fig 2c and d ---------- #
+# ---------- fig 2c and d (RuO2/G-450Ox)---------- #
 
 fig_cd, axes_cd = plt.subplots(nrows=3, sharex=True)
 axes_cd[0].set_ylabel("O2 cal. signal / (pmol s$^{-1}$)")
@@ -129,17 +116,13 @@ t, v = ecms_2.grab("potential", tspan=tspan_2)  # time in [s], potential vs RHE 
 t_MS = t + 0  # A delay in the MS data can be applied here (in [s])
 #  ^ for example, the average delay for O2 at L=100um is 3.3s [Trimarco2018]
 #  ^ needs to be stated clearly and transparently if you choose to do so!
-n_dot_O2 = ecms_2.grab_for_t("n_dot_O2", t=t_MS)  # O2 flux in [mol/s]
-n_dot_CO2 = ecms_2.grab_for_t("n_dot_CO2", t=t_MS)  # CO2 flux in [mol/s]
+n_dot_O2 = ecms_2.grab_for_t("n_dot_O2", t=t_MS, tspan_bg=[0, 20])  # O2 flux in [mol/s]
+n_dot_CO2 = ecms_2.grab_for_t("n_dot_CO2", t=t_MS, tspan_bg=[0, 20])  # CO2 flux in [mol/s]
 j_total = ecms_2.grab_for_t("raw_current", t=t)  # current in [mA]
 
 axes_cd[0].plot(v, n_dot_O2 * 1e12, "k")
 axes_cd[1].plot(v, n_dot_CO2 * 1e12, "brown")
 axes_cd[2].plot(v, j_total, "r")
-
-# to make the figures comparable, we set the same y-axis limits as fig_ab:
-for i in range(3):
-    axes_cd[i].set_ylim(axes_ab[i].get_ylim())
 
 # now we calculate the mass activity.
 j_O2 = n_dot_O2 * (4 * FARADAY_CONSTANT)  # OER current in [A]
@@ -171,4 +154,24 @@ right_axes_cd[1].set_ylabel("j$_{CO2}$ / (A g$^{-1}$)")
 right_axes_cd[2].set_ylabel("j$_{total}$ / (A g$^{-1}$)")
 
 fig_cd.set_figheight(fig_cd.get_figwidth() * 2)
+
+# ------------------- equalize axes and save figures ------------------------ #
+# to make the figures comparable, we set the same y-axis limits on fig_ab and fig_bc:
+for i in range(3):
+    ylim_ab = axes_ab[i].get_ylim()
+    ylim_cd = axes_cd[i].get_ylim()
+    ylim = (min((ylim_ab[0], ylim_cd[0])), max((ylim_ab[-1], ylim_cd[-1])))
+    axes_ab[i].set_ylim(ylim)
+    axes_cd[i].set_ylim(ylim)
+
+    # We also have to rescale the right axes for the MS data...
+    right_axes_ab[i].set_ylim([y * FACTOR_MS for y in ylim])
+    right_axes_cd[i].set_ylim([y * FACTOR_MS for y in ylim])
+
+# And for the EC data...
+right_axes_ab[2].set_ylim([y * FACTOR_J for y in axes_ab[2].get_ylim()])
+right_axes_cd[2].set_ylim([y * FACTOR_J for y in axes_cd[2].get_ylim()])
+
+# Now we're ready to save the figures:
+fig_ab.savefig("fig2ab.png")
 fig_cd.savefig("fig2cd.png")
