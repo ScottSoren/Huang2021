@@ -1,5 +1,4 @@
 from pathlib import Path
-import numpy as np
 from matplotlib import pyplot as plt
 
 from ixdat import Measurement
@@ -9,7 +8,7 @@ from ixdat.constants import FARADAY_CONSTANT
 # ---------- import and calibrate the data ------------- #
 data_dir = (
     Path(r"C:\Users\scott\Dropbox\WORKSPACES\China\Junheng\published data")
-    / r"Figure 2\the raw data of MS and EC"
+    / r"Figure 2 and 3\the raw data of MS and EC"
 )
 
 ec_1 = Measurement.read(data_dir / "RuG-450Red CV-46cyc.txt", reader="chi")
@@ -65,7 +64,9 @@ t_MS = t + 0  # A delay in the MS data can be applied here (in [s])
 #  ^ for example, the average delay for O2 at L=100um is 3.3s [Trimarco2018]
 #  ^ needs to be stated clearly and transparently if you choose to do so!
 n_dot_O2 = ecms_1.grab_for_t("n_dot_O2", t=t_MS, tspan_bg=[0, 20])  # O2 flux in [mol/s]
-n_dot_CO2 = ecms_1.grab_for_t("n_dot_CO2", t=t_MS, tspan_bg=[0, 20])  # CO2 flux in [mol/s]
+n_dot_CO2 = ecms_1.grab_for_t(
+    "n_dot_CO2", t=t_MS, tspan_bg=[0, 20]
+)  # CO2 flux in [mol/s]
 j_total = ecms_1.grab_for_t("raw_current", t=t)  # current in [mA]
 
 axes_ab[0].plot(v, n_dot_O2 * 1e12, "k")
@@ -117,7 +118,9 @@ t_MS = t + 0  # A delay in the MS data can be applied here (in [s])
 #  ^ for example, the average delay for O2 at L=100um is 3.3s [Trimarco2018]
 #  ^ needs to be stated clearly and transparently if you choose to do so!
 n_dot_O2 = ecms_2.grab_for_t("n_dot_O2", t=t_MS, tspan_bg=[0, 20])  # O2 flux in [mol/s]
-n_dot_CO2 = ecms_2.grab_for_t("n_dot_CO2", t=t_MS, tspan_bg=[0, 20])  # CO2 flux in [mol/s]
+n_dot_CO2 = ecms_2.grab_for_t(
+    "n_dot_CO2", t=t_MS, tspan_bg=[0, 20]
+)  # CO2 flux in [mol/s]
 j_total = ecms_2.grab_for_t("raw_current", t=t)  # current in [mA]
 
 axes_cd[0].plot(v, n_dot_O2 * 1e12, "k")

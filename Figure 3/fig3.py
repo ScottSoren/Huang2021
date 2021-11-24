@@ -12,7 +12,7 @@ from ixdat.constants import FARADAY_CONSTANT
 # ---------- import and calibrate the data ------------- #
 data_dir = (
     Path(r"C:\Users\scott\Dropbox\WORKSPACES\China\Junheng\published data")
-    / r"Figure 2\the raw data of MS and EC"
+    / r"Figure 2 and 3\the raw data of MS and EC"
 )
 
 ec_1 = Measurement.read(data_dir / "RuG-450Red CV-46cyc.txt", reader="chi")
@@ -80,12 +80,8 @@ ax_c.set_ylabel("U$_{RHE}$ / (V)")
 ax_a_total.tick_params(
     axis="x", top=True, bottom=True, labeltop=True, labelbottom=False
 )
-ax_a_O2.tick_params(
-    axis="x", top=True, bottom=True, labeltop=False, labelbottom=False
-)
-ax_a_CO2.tick_params(
-    axis="x", top=True, bottom=True, labeltop=False, labelbottom=False
-)
+ax_a_O2.tick_params(axis="x", top=True, bottom=True, labeltop=False, labelbottom=False)
+ax_a_CO2.tick_params(axis="x", top=True, bottom=True, labeltop=False, labelbottom=False)
 
 
 # plot the current and partial currents
@@ -116,14 +112,19 @@ for c in cycle_numbers:
     n_dot_c_CO2 = cycle.grab_for_t("n_dot_CO2", t_c)  # in [mol/s]
     j_c_O2 = n_dot_c_O2 * 4 * FARADAY_CONSTANT * 1e3 / ecms_1.A_el  # in [mA/cm^2]
     j_c_CO2 = n_dot_c_CO2 * 4 * FARADAY_CONSTANT * 1e3 / ecms_1.A_el  # in [mA/cm^2]
-    FE_c_O2 = np.trapz(j_c_O2, t_c) / Q   # ratio of O2 current to total current
-    FE_c_CO2 = np.trapz(j_c_CO2, t_c) / Q   # ratio of CO2 current to total current
+    FE_c_O2 = np.trapz(j_c_O2, t_c) / Q  # ratio of O2 current to total current
+    FE_c_CO2 = np.trapz(j_c_CO2, t_c) / Q  # ratio of CO2 current to total current
     center = np.mean(t_c)
     centers.append(center)
     width = (t_c[-1] - t_c[0]) / 2
     ax_b.bar(center, FE_c_O2 * 100, color="k", alpha=0.5, width=width)
     ax_b.bar(
-        center, FE_c_CO2 * 100, bottom=FE_c_O2 * 100, color="brown", alpha=0.5, width=width
+        center,
+        FE_c_CO2 * 100,
+        bottom=FE_c_O2 * 100,
+        color="brown",
+        alpha=0.5,
+        width=width,
     )
 
 ax_b.set_xticks(centers)
@@ -174,12 +175,8 @@ ax_f.set_ylabel("U$_{RHE}$ / (V)")
 ax_d_total.tick_params(
     axis="x", top=True, bottom=True, labeltop=True, labelbottom=False
 )
-ax_d_O2.tick_params(
-    axis="x", top=True, bottom=True, labeltop=False, labelbottom=False
-)
-ax_d_CO2.tick_params(
-    axis="x", top=True, bottom=True, labeltop=False, labelbottom=False
-)
+ax_d_O2.tick_params(axis="x", top=True, bottom=True, labeltop=False, labelbottom=False)
+ax_d_CO2.tick_params(axis="x", top=True, bottom=True, labeltop=False, labelbottom=False)
 
 
 # plot the current and partial currents
@@ -210,14 +207,19 @@ for c in cycle_numbers:
     n_dot_c_CO2 = cycle.grab_for_t("n_dot_CO2", t_c)  # in [mol/s]
     j_c_O2 = n_dot_c_O2 * 4 * FARADAY_CONSTANT * 1e3 / ecms_2.A_el  # in [mA/cm^2]
     j_c_CO2 = n_dot_c_CO2 * 4 * FARADAY_CONSTANT * 1e3 / ecms_2.A_el  # in [mA/cm^2]
-    FE_c_O2 = np.trapz(j_c_O2, t_c) / Q   # ratio of O2 current to total current
-    FE_c_CO2 = np.trapz(j_c_CO2, t_c) / Q   # ratio of CO2 current to total current
+    FE_c_O2 = np.trapz(j_c_O2, t_c) / Q  # ratio of O2 current to total current
+    FE_c_CO2 = np.trapz(j_c_CO2, t_c) / Q  # ratio of CO2 current to total current
     center = np.mean(t_c)
     centers.append(center)
     width = (t_c[-1] - t_c[0]) / 2
     ax_e.bar(center, FE_c_O2 * 100, color="k", alpha=0.5, width=width)
     ax_e.bar(
-        center, FE_c_CO2 * 100, bottom=FE_c_O2 * 100, color="brown", alpha=0.5, width=width
+        center,
+        FE_c_CO2 * 100,
+        bottom=FE_c_O2 * 100,
+        color="brown",
+        alpha=0.5,
+        width=width,
     )
 
 ax_e.set_xticks(centers)
@@ -243,8 +245,12 @@ ax_f.plot(t, v, "b")
 # ------ Get the corresponding axes y limts to be equal and save the figs! --------- #
 
 for ax_abc, ax_def in [
-    (ax_a_total, ax_d_total), (ax_a_O2, ax_d_O2), (ax_a_CO2, ax_d_CO2),
-    (ax_b, ax_e), (ax_b_right, ax_e_right), (ax_c, ax_f)
+    (ax_a_total, ax_d_total),
+    (ax_a_O2, ax_d_O2),
+    (ax_a_CO2, ax_d_CO2),
+    (ax_b, ax_e),
+    (ax_b_right, ax_e_right),
+    (ax_c, ax_f),
 ]:
 
     ylim_abc = ax_abc.get_ylim()
