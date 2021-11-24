@@ -15,7 +15,6 @@ calibration_1 = ECMSCalibration(
     ms_cal_results=[
         MSCalResult(mol="O2", mass="M32", cal_type="internal", F=0.02321959502828152),
         MSCalResult(mol="CO2", mass="M44", cal_type="internal", F=0.017006001217645464),
-        # From Figure S6d: 275 pmol/s of CO2 production gives 2.75 pA MS signal.
     ],
     RE_vs_RHE=RE_vs_RHE,
     A_el=A_el,
@@ -27,7 +26,6 @@ calibration_2 = ECMSCalibration(
     ms_cal_results=[
         MSCalResult(mol="O2", mass="M32", cal_type="internal", F=0.0124),
         MSCalResult(mol="CO2", mass="M44", cal_type="internal", F=0.0097),
-        # From Figure S6d: 275 pmol/s of CO2 production gives 2.75 pA MS signal.
     ],
     RE_vs_RHE=RE_vs_RHE,
     A_el=A_el,
@@ -40,7 +38,6 @@ calibration_3 = ECMSCalibration(
     ms_cal_results=[
         MSCalResult(mol="O2", mass="M32", cal_type="internal", F=0.0495593221803036),
         MSCalResult(mol="CO2", mass="M44", cal_type="internal", F=0.046182030605598154),
-        # From Figure S6d: 275 pmol/s of CO2 production gives 2.75 pA MS signal.
     ],
     RE_vs_RHE=RE_vs_RHE,
     A_el=A_el,
