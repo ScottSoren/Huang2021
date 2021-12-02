@@ -12,10 +12,9 @@ Instructions
 
 1. Clone this repository.
 
-2. Install ``ixdat``. Right now this package runs on the [Fuzhou] branch, so you will
-   have to clone and install ``ixdat`` locally as described here:
-   https://ixdat.readthedocs.io/en/latest/developing.html
-   **We will fix this soon**
+2. Install ``ixdat`` version >= 0.1.6. The command is:
+
+  ``pip install --upgrade ixdat``
 
 3. Download the data onto your computer from this Dropbox link:
    https://www.dropbox.com/sh/7u5ffi94upkvphc/AADlAWi2QtNJsjxV4YZ9b1yka?dl=0
