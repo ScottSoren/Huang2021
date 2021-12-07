@@ -29,9 +29,9 @@ ecms_2 = ec_2 + ms
 # ecms_2.plot()
 
 # define and apply the MS calibration:
-ecms_1.calibration = ECMSCalibration.read("../calibration/calibration_3.ix")
+ecms_1.add_calibration(ECMSCalibration.read("../calibration/calibration_3.ix"))
 # ecms_1.plot(mol_list=["O2", "CO2"])  # overview plot with calibrated data
-ecms_2.calibration = ECMSCalibration.read("../calibration/calibration_3.ix")
+ecms_2.add_calibration(ECMSCalibration.read("../calibration/calibration_3.ix"))
 # ecms_2.plot(mol_list=["O2", "CO2"])  # overview plot with calibrated data
 
 # ------- define the timespans (using the overview plots) --------- #
