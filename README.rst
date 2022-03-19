@@ -7,6 +7,11 @@ Junheng Huang et al, **Online Electrochemistry−Mass Spectrometry Evaluation of
 Acidic Oxygen Evolution Reaction at Supported Catalysts** ACS Catal., 11, 12745-12753, **2021**.
 https://doi.org/10.1021/acscatal.1c03430
 
+This branch of the repository uses ixdat v0.1.x. It should run with ixdat v0.2, giving
+deprecation warnings, but you will need to (re-)run the script **calibration/make_calibrations.py**
+
+For ixdat v0.2+, use the main branch instead.
+
 Instructions
 ............
 
