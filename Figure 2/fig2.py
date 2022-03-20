@@ -7,7 +7,7 @@ from ixdat.constants import FARADAY_CONSTANT
 
 # ---------- import and calibrate the data ------------- #
 data_dir = (
-    Path(r"C:\Users\scott\Dropbox\WORKSPACES\China\Junheng\published data")
+    Path(r"~/Dropbox/DATA/Huang2021").expanduser()
     / r"Figure 2 and 3\the raw data of MS and EC"
 )
 
@@ -28,9 +28,9 @@ ecms_2 = ec_2 + ms_2
 # ecms_2.plot()
 
 # define and apply the MS calibration:
-ecms_1.calibration = ECMSCalibration.read("../calibration/calibration_1.ix")
+ecms_1.add_calibration(ECMSCalibration.read("../calibration/calibration_1.ix"))
 # ecms_1.plot(mol_list=["O2", "CO2"])  # overview plot with calibrated data
-ecms_2.calibration = ECMSCalibration.read("../calibration/calibration_2.ix")
+ecms_2.add_calibration(ECMSCalibration.read("../calibration/calibration_2.ix"))
 # ecms_2.plot(mol_list=["O2", "CO2"])  # overview plot with calibrated data
 
 # ------- define the timespans (using the overview plots) --------- #
