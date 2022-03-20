@@ -1,26 +1,26 @@
 {
+    "technique": "EC-MS",
     "name": "EC-MS ms_calibration for None on None",
     "tstamp": null,
-    "technique": "EC-MS",
-    "setup": null,
-    "A_el": 0.196,
     "L": null,
     "date": null,
+    "setup": null,
+    "A_el": 0.196,
     "RE_vs_RHE": 0.26,
     "ms_cal_results": [
         {
-            "cal_type": "internal",
-            "name": "O2 at M32",
             "mol": "O2",
+            "F": 0.02321959502828152,
             "mass": "M32",
-            "F": 0.02321959502828152
+            "cal_type": "internal",
+            "name": "O2 at M32"
         },
         {
-            "cal_type": "internal",
-            "name": "CO2 at M44",
             "mol": "CO2",
+            "F": 0.017006001217645464,
             "mass": "M44",
-            "F": 0.017006001217645464
+            "cal_type": "internal",
+            "name": "CO2 at M44"
         }
     ]
 }

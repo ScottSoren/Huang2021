@@ -7,7 +7,7 @@ from ixdat.constants import FARADAY_CONSTANT
 
 # ---------- import and calibrate the data ------------- #
 data_dir = (
-    Path(r"C:\Users\scott\Dropbox\WORKSPACES\China\Junheng\published data")
+    Path(r"~/Dropbox/DATA/Huang2021").expanduser()
     / r"Figure 2 and 3\the raw data of MS and EC"
 )
 
