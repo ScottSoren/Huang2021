@@ -12,9 +12,12 @@ Instructions
 
 1. Clone this repository.
 
-2. Install ``ixdat`` version >= 0.1.6. The command is:
+2. Install ``ixdat`` version >= 0.2.0. The command is:
 
-  ``pip install --upgrade ixdat``
+    ``pip install --upgrade ixdat``
+
+   For a version of the repository compatible with ixdat v0.1.x, use the
+   `ixdat_v0p1 branch <https://github.com/ScottSoren/Huang2021/tree/ixdat_v0p1>`_.
 
 3. Download the data onto your computer from this Dropbox link:
    https://www.dropbox.com/sh/7u5ffi94upkvphc/AADlAWi2QtNJsjxV4YZ9b1yka?dl=0
