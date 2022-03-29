@@ -20,4 +20,4 @@ for (name, folder, raw_EC_data, raw_MS_data, tspan) in [
     ecms = ec + ms
     ecms.tstamp += ecms.t[0]  # necessary as CHI records the end and not start timestamp
     ecms.plot(tspan=tspan)  # a sanity check here.
-    ecms.export(name + ".csv", tspan=tspan)
+    ecms.export(name + ".csv", tspan=tspan, time_step=2)
