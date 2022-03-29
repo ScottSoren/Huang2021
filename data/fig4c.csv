@@ -1,4 +1,4 @@
-ixdat version = 0.2.0
+ixdat version = 0.2.1dev
 name = 02-RuO2 rgo 450oxo-50Ag.txt AND timescan-sem190-LOW.txt
 technique = EC-MS
 tstamp = 1577206441.2

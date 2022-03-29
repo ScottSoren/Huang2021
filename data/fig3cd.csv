@@ -1,4 +1,4 @@
-ixdat version = 0.2.0
+ixdat version = 0.2.1dev
 name = RuO2 G-450OX-10cyc.txt AND timescan-RuO2G-450Ox-CV-10cyc.txt
 technique = EC-MS
 tstamp = 1608572231.4
