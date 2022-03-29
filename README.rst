@@ -19,11 +19,14 @@ Instructions
    For a version of the repository compatible with ixdat v0.1.x, use the
    `ixdat_v0p1 branch <https://github.com/ScottSoren/Huang2021/tree/ixdat_v0p1>`_.
 
-3. Download the data onto your computer from this Dropbox link:
-   https://www.dropbox.com/sh/7u5ffi94upkvphc/AADlAWi2QtNJsjxV4YZ9b1yka?dl=0
-   **We will make the data available in another way soon**
+   (ixdat version >= 0.2.1 is needed for data/data_conversion.py)
 
-4. Change the path in the ``data_dir`` variable at the top of each script to the appropriate location on your computer.
+3. There are two ways to run it. If you wish to run from our raw data, as it was exported from the potentiostat and mass spectrometr, do the following:
+
+     Switch to the `raw data branch <https://github.com/ScottSoren/Huang2021/tree/raw_data>`_ and follow the instructions.
+   
+   If you are content to run on a reduced dataset that has been assempled and exported with ``ixdat`` in the script ``data/data_conversion.py``, 
+   then the scripts will just run once you've cloed the repository!
 
 5. Run the scripts! `Cite the article <https://doi.org/10.1021/acscatal.1c03430>`_ if you find this useful!
 
