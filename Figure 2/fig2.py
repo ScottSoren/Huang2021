@@ -1,4 +1,3 @@
-from pathlib import Path
 from matplotlib import pyplot as plt
 
 from ixdat import Measurement
@@ -6,25 +5,11 @@ from ixdat.techniques.ec_ms import MSCalResult, ECMSCalibration
 from ixdat.constants import FARADAY_CONSTANT
 
 # ---------- import and calibrate the data ------------- #
-data_dir = (
-    Path(r"~/Dropbox/DATA/Huang2021").expanduser()
-    / r"Figure 2 and 3\the raw data of MS and EC"
-)
 
-ec_1 = Measurement.read(data_dir / "RuG-450Red CV-46cyc.txt", reader="chi")
-# ec_1.plot()  # plot EC data to check if import worked
-ms_1 = Measurement.read(data_dir / "timescan-RuG-450Red CV-46cyc.txt", reader="rgasoft")
-# ms_1.plot()  # plot MS data to check if import worked
-ecms_1 = ec_1 + ms_1
+ecms_1 = Measurement.read("../data/fig3ab.csv", reader="ixdat")
 # ecms_1.plot()  # overview plot
 
-ec_2 = Measurement.read(data_dir / "RuO2 G-450OX-10cyc.txt", reader="chi")
-# ec_2.plot()
-ms_2 = Measurement.read(
-    data_dir / "timescan-RuO2G-450Ox-CV-10cyc.txt", reader="rgasoft"
-)
-# ms_2.plot()
-ecms_2 = ec_2 + ms_2
+ecms_2 = Measurement.read("../data/fig3cd.csv", reader="ixdat")
 # ecms_2.plot()
 
 # define and apply the MS calibration:

@@ -9,23 +9,10 @@ from ixdat.techniques.ec_ms import ECMSCalibration
 from ixdat.constants import FARADAY_CONSTANT
 
 # ---------- import and calibrate the data ------------- #
-data_dir = (
-    Path(r"~/Dropbox/DATA/Huang2021").expanduser()
-    / r"Figure 4\the raw data of MS and EC"
-)
-
-ms = Measurement.read(data_dir / "timescan-sem190-LOW.txt", reader="rgasoft")
-# ms.plot()  # plot MS data to check if import worked
-
-
-ec_1 = Measurement.read(data_dir / "01-Ru rgo 450H-50Ag.txt", reader="chi")
-# ec_1.plot()  # plot EC data to check if import worked
-ecms_1 = ec_1 + ms
+ecms_1 = Measurement.read("../data/fig4b.csv", reader="ixdat")
 # ecms_1.plot()  # overview plot
 
-ec_2 = Measurement.read(data_dir / "02-RuO2 rgo 450oxo-50Ag.txt", reader="chi")
-# ec_2.plot()
-ecms_2 = ec_2 + ms
+ecms_2 = Measurement.read("../data/fig4c.csv", reader="ixdat")
 # ecms_2.plot()
 
 # define and apply the MS calibration:
